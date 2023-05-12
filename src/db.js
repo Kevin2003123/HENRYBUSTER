@@ -2,7 +2,14 @@ require("dotenv").config();
 const { Sequelize } = require("sequelize");
 const fs = require("fs");
 const path = require("path");
-const User = require("./models/User");
+const user = require("./models/User");
+const format = require("./models/Format");
+const genre = require("./models/Genre");
+const inventory = require("./models/Inventory");
+const movie = require("./models/Movie");
+const purchase = require("./models/Purchase");
+const rating = require("./models/Rating");
+const language = require("./models/Language");
 const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
 
 
@@ -40,15 +47,39 @@ sequelize.models = Object.fromEntries(capsEntries);
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
 
-User(sequelize);
-
-
-
+user(sequelize);
+format(sequelize);
+genre(sequelize);
+inventory(sequelize);
+purchase(sequelize);
+movie(sequelize);
+rating(sequelize);
+language(sequelize);
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
+const { User, Format, Genre, Inventory, Purchase, Movie, Rating, Language} = sequelize.models;
 
+Movie.belongsToMany(Genre, { through: 'MovieGenre' });
+Genre.belongsToMany(Movie, { through: 'MovieGenre' });
 
+Format.hasOne(Movie);
+Movie.belongsTo(Format);
+
+Movie.hasOne(Inventory); 
+Inventory.belongsTo(Movie);
+
+Movie.hasMany(Rating); 
+Rating.belongsTo(Movie);
+
+User.hasOne(Rating);
+Rating.belongsTo(User);
+
+Language.hasOne(Movie);
+Movie.belongsTo(Language);
+
+Movie.hasOne(Purchase);
+Purchase.belongsTo(Movie);
 
 
 module.exports = {

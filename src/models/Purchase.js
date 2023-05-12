@@ -4,25 +4,38 @@ const { DataTypes } = require("sequelize");
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define(
-    "User",
+    "Purchase",
     {
       id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
       },
-      name: {
+      date: {
+        type: DataTypes.DATE,
+        allowNull: false,
+      },
+      status:{
         type: DataTypes.STRING,
         allowNull: false,
+        defaultValue: "Pendiente"
       },
-      password: {
+      address:{
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: false
       },
-      isAdmin: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false,
+      quantity:{
+        type: DataTypes.INTEGER,
+        allowNull: false
       },
+      total:{
+        type: DataTypes.DECIMAL,
+        allowNull: false
+      },
+      idUser:{
+        type: DataTypes.INTEGER,
+        allowNull: true,
+      }
     },
     {
       timestamps: false,

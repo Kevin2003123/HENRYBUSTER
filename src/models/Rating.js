@@ -4,24 +4,21 @@ const { DataTypes } = require("sequelize");
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define(
-    "User",
+    "Rating",
     {
       id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
       },
-      name: {
+      comment: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      password: {
-        type: DataTypes.STRING,
+      rating: {
+        type: DataTypes.DECIMAL,
         allowNull: false,
-      },
-      isAdmin: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false,
+        defaultValue: 0
       },
     },
     {
