@@ -22,17 +22,30 @@ const fillMovie = require("./src/controllers/FillMovie.js");
 const fillFormat = require("./src/controllers/fillFormat.js");
 const fillGenre = require("./src/controllers/fillGenre.js");
 const fillLanguage = require("./src/controllers/fillLanguage.js");
-const { conn, Format, Genre, Language, Movie } = require("./src/db.js");
-
-
+const fillRating = require("./src/controllers/fillRating.js");
+const fillUser = require("./src/controllers/fillUser.js");
+const {
+  conn,
+  Format,
+  Genre,
+  Language,
+  Movie,
+  User,
+  Rating,
+} = require("./src/db.js");
 
 // Syncing all the models at once.
 conn.sync({ force: true }).then(() => {
-  server.listen(3001, async() => {
+  server.listen(3001, async () => {
     console.log("%s listening at 3001"); // eslint-disable-line no-console
-     fillFormat(Format);
+    fillUser(User);
+    fillFormat(Format);
     fillGenre(Genre);
     fillLanguage(Language);
     fillMovie(Movie);
-  })
-});
+    setTimeout(function() {
+      fillRating(Rating);
+    }, 3000);
+    
+  });
+})

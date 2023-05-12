@@ -30,6 +30,16 @@ module.exports = (sequelize) => {
       date:{
         type: DataTypes.DATE,
         allowNull: false
+      },
+      vote_count:{
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+      },
+      vote_average:{
+        type: DataTypes.DECIMAL,
+        allowNull: false,
+        defaultValue: 0
       }
     },
     {
