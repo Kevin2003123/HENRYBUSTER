@@ -1,9 +1,9 @@
-const {Languaje} = require('../db');
+const {Language} = require('../db');
 
 
-const getLanguaje= async (req, res) => {
+const getLanguage= async (req, res) => {
     try {
-        const languajes = await Languaje.findAll();
+        const languajes = await Language.findAll();
 
       res.status(200).json(languajes);
     } catch (error) {
@@ -11,5 +11,5 @@ const getLanguaje= async (req, res) => {
     }
   };
   
-  module.exports = getLanguaje;
+  module.exports = getLanguage;
   
